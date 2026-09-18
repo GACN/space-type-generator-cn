@@ -1,0 +1,282 @@
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  
+  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>太空字体生成器 · 容器 VESSEL（中文版）</title>
+
+  <!-- <script src="cn_libs/cdnjs_cloudflare_com__1.7.0__p5.min.js"></script> -->
+  <script src="cn_libs/cdnjs_cloudflare_com__1.6.0__p5.min.js"></script>
+  <script src="cn_libs/unpkg_com__p5.js-svg@1.5.1"></script>
+    <script src="cn_font.js" type="text/javascript"></script>
+  <script src="cn_libs/unpkg_com__h264-mp4-encoder.web.js"></script>
+  
+  <link rel="stylesheet" href="style_vessel.css">
+  <script src="cn_libs/code_jquery_com__jquery-1.12.4.js"></script>
+  <script src="cn_libs/code_jquery_com__1.12.1__jquery-ui.js"></script>
+  <script src="sketch_vessel.js" type="text/javascript"></script>
+  <script src="vessel_script/update.js" type="text/javascript"></script>
+  <script src="vessel_script/animators.js" type="text/javascript"></script>
+  <script src="vessel_script/recording.js" type="text/javascript"></script>
+
+  <script src="vessel_script/0_classBase.js" type="text/javascript"></script>
+  <script src="vessel_script/1_classLine.js" type="text/javascript"></script>
+
+  <link rel="preconnect" 
+  <link href="cn_libs/gfonts__e5a8117c.css" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<body>
+  <div id="widget">
+    <div class="dropdown">
+      <button class="dropbtn">选择玩法…</button>
+      <div class="dropdown-content">
+        <a href="index.html">圆柱体 · CYLINDER</a>
+        <a href="field.html">字阵 · FIELD</a>
+        <a href="stripes.html">条纹 · STRIPES</a>
+        <a href="coil.html">线圈 · COIL</a>
+        <a href="flag.html">旗面 · FLAG</a>
+        <a href="morisawa.html">森泽 · MORISAWA</a>
+        <a href="cascade.html">瀑布 · CASCADE</a>
+        <a href="ribbon.html">缎带 · RIBBON</a>
+        <a href="layers.html">图层 · LAYERS</a>
+        <a href="danger.html">危险 · DANGER</a>
+        <a href="string.html">线绳 · STRING</a>
+        <a href="badge.html">徽章 · BADGE</a>
+        <a href="clutter.html">杂物 · CLUTTER</a>
+        <a href="construct.html">构造 · CONSTRUCT</a>
+        <a href="snap.html">弹扣 · SNAP</a>
+        <a href="flash.html">闪击 · FLASH</a>
+        <a href="pow.html">爆破 · POW</a>
+        <a href="crash.html">坍塌 · CRASH</a>
+        <a href="crashclock.html">坍塌时钟 · CRASH CLOCK</a>
+        <a href="vessel.html" style="font-weight:700">容器 · VESSEL</a>
+        <a href="shine.html">光耀 · SHINE</a>
+        <a href="boost.html">立体冲压 · BOOST</a>
+        <a href="boxsquad.html">方块小队 · BoxSquad</a>
+        <a href="guide.html">📖 中文使用说明</a>
+      </div>
+    </div>
+    
+    <div id="generatorInput">
+      <div class="titleh2">
+        <h2>STG v.Vessel</h2>
+        <p>动态字体生成器 · 作者 <a href="https://www.instagram.com/kiel.d.m/" target="_blank">kielm</a></p>
+        <div class="popup" onclick="myFunction()">说明与支持
+          <span class="popuptext" id="myPopup">
+            容器 1.0
+            <br>
+            <br>想支持 STG，可以 <br> <a href="https://www.buymeacoffee.com/kieldm" target="_blank">请我喝咖啡</a>
+            <br>
+            <br>个人用途随便用！
+            <br>请我喝一杯 <a href="https://www.instagram.com/kiel.d.m/" target="_blank">标签</a> 如果方便的话。
+            <br>
+            <br>商业使用请 <a href="/cdn-cgi/l/email-protection#f19a98949ddf95df9cb1969c90989ddf929e9c">给我发邮件。</a>
+            <br>
+            <br>字体来自 <br><a href="https://www.zetafonts.com/" target="_blank">Zetafonts</a> (Milligram, Unigeo, Dialogue),<br>
+            以及 <a href="https://pangrampangram.com/" target="_blank">Pangram Pangram</a>(Editorial New, RadioGrotesk, NeueWorld),<br>
+          </span>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>文字</h1></button>
+      <div class="content">
+        <div class="module">         
+          <textarea id="textArea" rows=4 oninput="setText()"></textarea>
+          <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+            <option value="0" selected="selected">Milligram - Regular</option>
+            <option value="1">Object Sans - Heavy</option>
+            <option value="2">Editorial New - Thin</option>
+            <option value="3">NeueWorld - SemiCondensedLight</option>
+            <option value="4">Unigeo32 - Light</option>
+            <option value="5">Dialogue A - Light</option>
+          </select>
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>大小</h3></div>
+            <input type="range" min="0" max="100" value="30" id="pgTextSize" oninput="setPGtextSize(this.value)">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>风格</h1></button>
+      <div class="content">
+        <div class="module">
+          <div class="coupling1">
+            <label for="debugToggle">调试</label>
+            <input type="checkbox" id="debugToggle" name="debugToggle" onclick="setDebugOn()">
+          </div>
+          
+          <div class="coupling3">
+            <div class="coupling_label3"><h4>波峰</h4></div>
+            <div class="coupling2">
+              <div class="couplingEntry">
+                <input type="radio" id="none" name="connectSet" value=0 onclick="setCrestType(this.value)">
+                <label for="none">无</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="strokeCrest" name="connectSet" value=1 onclick="setCrestType(this.value)" checked>
+                <label for="strokeCrest">描边</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="fillCrest" name="connectSet" value=2 onclick="setCrestType(this.value)">
+                <label for="fillCrest">填充</label>
+              </div>
+            </div>
+
+            <div id="strokeVis" class="coupling4" >
+              <div class="coupling_label"><h3>描边</h3></div>
+              <input type="range" min="0" max="100" value="5" id="vesselSW" oninput="setVesselSW(this.value)">
+            </div>
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label">前景</div>
+            <input type="color" id="foreColor" name="foreColor" value="#ffffff" oninput="setForeColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label">背景</div>
+            <input type="color" id="bkgdColor" name="bkgdColor" value="#000000" oninput="setBkgdColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label">调试</div>
+            <input type="color" id="debugColor" name="debugColor" value="#00ff00" oninput="setDebugColor(this.value)">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>运动</h1></button>
+      <div class="content">
+        <div class="coupling1">
+          <label for="centerToggle">保持居中</label>
+          <input type="checkbox" id="centerToggle" name="centerToggle" onclick="setCenterOn()">
+        </div>
+
+        <div class="module">
+          <div class="accelModule">
+            <!-- <h4>INTRO STAGE</h4> -->
+            <div class="selectPair">
+              <select name="stageAstrength" class="stageSelect" onchange="setStageAstrength(this.value)">
+                <option value="0">正弦曲线</option>
+                <option value="1">三次曲线</option>
+                <option value="2">Circ</option>
+                <option value="3" selected="selected">指数曲线</option>
+                <option value="4">返回</option>
+                <option value="5">弹跳</option>
+                <option value="6">弹性</option>
+              </select>
+  
+              <select name="stageAdirect" class="stageSelect" onchange="setStageAdirect(this.value)">
+                <option value="0">进</option>
+                <option value="1">出</option>
+                <option value="2" selected="selected">进出</option>
+              </select>
+            </div>    
+  
+            <div class="coupling1">
+              <div class="coupling_label"><h3>长度</h3></div>
+              <input type="range" min="0" max="100" value="60" id="stageAlength" oninput="setStageAlength()">
+            </div>      
+
+            <div class="coupling1">
+              <div class="coupling_label"><h3>Pause</h3></div>
+              <input type="range" min="0" max="100" value="30" id="stageBlength" oninput="setStageBlength()">
+            </div>
+          </div> 
+          
+          <!-- <select name="offsetArrange" id="offsetArrange" onchange="setOffsetArrang(this.value)">
+            <option value="0" selected="selected">Left - Right</option>
+            <option value="1">Inside Out</option>
+          </select> -->
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Letter</h3></div>
+            <input type="range" min="0" max="100" value="5" id="letterOffset" oninput="setLetterOffset(this.value)">
+          </div>
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Line</h3></div>
+            <input type="range" min="0" max="100" value="5" id="lineOffset" oninput="setLineOffset(this.value)">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>导出</h1></button>
+      <div class="content">
+        <div class="coupling3">
+          <div class="couplingEntry">
+            <input type="radio" id="window" name="saveSize" value=0 onclick="sizeSaveChange(this.value)" checked>
+            <label for="window">窗口尺寸</label>
+          </div>
+          <div class="couplingEntry">
+            <input type="radio" id="vert" name="saveSize" value=1 onclick="sizeSaveChange(this.value)">
+            <label for="vert">竖版 9:16</label>
+          </div>
+          <div class="couplingEntry">
+            <input type="radio" id="squa" name="saveSize" value=2 onclick="sizeSaveChange(this.value)">
+            <label for="squa">方形 1:1</label>
+          </div>
+        </div>
+
+        <div class="coupling1">
+          <button type="button" class="saveSVGbutton" onclick="runSVGsave()">保存 SVG</button>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="saveJPGbutton" onclick="runJPGsave()">保存 JPG</button>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="saveMP4button" onclick="runSave()">录制 MP4</button>
+        </div>
+        <div class="coupling1">
+          <div id="recStatus">
+            <p>正在录制 <br><span id="recTicker"></span>/300 帧</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <input type="text" value="SPOOKY ACTION" id="text0" oninput="setText(this.value)"> -->
+
+  <div>
+    <label class="switch">
+      <input type="checkbox" checked oninput="hideWidget()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+  </script>
+
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+  
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+
+  <a href="guide.html" style="position:fixed;left:8px;bottom:6px;z-index:99999;font:11px/1.2 'IBM Plex Mono',monospace;color:#000;background:#fff;border:1px solid #000;padding:4px 7px;text-decoration:none;opacity:.7">中文说明</a>
+</body>
+
+</html>

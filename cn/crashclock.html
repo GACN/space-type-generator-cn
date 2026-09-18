@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="cn_libs/cdnjs_cloudflare_com__1.8.0__p5.min.js"></script>
+    <script src="cn_font.js" type="text/javascript"></script>
+    <script src="cn_libs/cdnjs_cloudflare_com__0.19.0__matter.min.js"></script>
+   
+    <link rel="stylesheet" type="text/css" href="style_crashClock.css">
+    <script src="cn_libs/code_jquery_com__jquery-3.2.1.js"></script>
+                                    
+    <link href="cn_libs/cdn_jsdelivr_net__roundslider.min.css" rel="stylesheet" />
+                                        
+    <script src="cn_libs/cdn_jsdelivr_net__roundslider.min.js"></script>
+
+    <script src="crashClock_script/animators.js"></script>
+    <script src="crashClock_script/class_0boundary.js"></script>
+    <script src="crashClock_script/class_0hand.js"></script>
+    <script src="crashClock_script/class_0particle.js"></script>
+    <script src="crashClock_script/class_0partPac.js"></script>
+    <script src="crashClock_script/class_1all.js"></script>
+    <script src="crashClock_script/class_2line.js"></script>
+    <script src="crashClock_script/class_3letter.js"></script>
+    <script src="sketch_crashClock.js"></script>
+    <script src="crashClock_script/update.js"></script>
+
+    <meta charset="utf-8" />
+
+    <link rel="preconnect" 
+    <link href="cn_libs/gfonts__e5a8117c.css" rel="stylesheet">  
+
+  </head>
+  <body>
+    <div id="widget">
+      <div class="dropdown">
+      <button class="dropbtn">选择玩法…</button>
+      <div class="dropdown-content">
+        <a href="index.html">圆柱体 · CYLINDER</a>
+        <a href="field.html">字阵 · FIELD</a>
+        <a href="stripes.html">条纹 · STRIPES</a>
+        <a href="coil.html">线圈 · COIL</a>
+        <a href="flag.html">旗面 · FLAG</a>
+        <a href="morisawa.html">森泽 · MORISAWA</a>
+        <a href="cascade.html">瀑布 · CASCADE</a>
+        <a href="ribbon.html">缎带 · RIBBON</a>
+        <a href="layers.html">图层 · LAYERS</a>
+        <a href="danger.html">危险 · DANGER</a>
+        <a href="string.html">线绳 · STRING</a>
+        <a href="badge.html">徽章 · BADGE</a>
+        <a href="clutter.html">杂物 · CLUTTER</a>
+        <a href="construct.html">构造 · CONSTRUCT</a>
+        <a href="snap.html">弹扣 · SNAP</a>
+        <a href="flash.html">闪击 · FLASH</a>
+        <a href="pow.html">爆破 · POW</a>
+        <a href="crash.html">坍塌 · CRASH</a>
+        <a href="crashclock.html" style="font-weight:700">坍塌时钟 · CRASH CLOCK</a>
+        <a href="vessel.html">容器 · VESSEL</a>
+        <a href="shine.html">光耀 · SHINE</a>
+        <a href="boost.html">立体冲压 · BOOST</a>
+        <a href="boxsquad.html">方块小队 · BoxSquad</a>
+        <a href="guide.html">📖 中文使用说明</a>
+      </div>
+    </div>
+      
+      <div id="generatorInput">
+        <div class="titleh2">
+          <h2>坍塌时钟</h2>
+          <p>动态字体生成器 · 作者 <a href="https://www.instagram.com/kiel.d.m/" target="_blank">kielm</a></p>
+          <div class="popup" onclick="myFunction()">说明与支持
+            <span class="popuptext" id="myPopup">
+              坍塌时钟 1.0
+              <br>
+              <br>想支持 STG，可以 <br> <a href="https://www.buymeacoffee.com/kieldm" target="_blank">请我喝咖啡</a>
+              <br>
+              <br>随便怎么用！
+              <br>请我喝一杯 <a href="https://www.instagram.com/kiel.d.m/" target="_blank">标签</a> 如果方便的话。
+              <br>
+              <br>字体来自 <br><a href="https://www.zetafonts.com/" target="_blank">Zetafonts</a> (Milligram, Evans),<br>
+              <a href="https://pangrampangram.com/" target="_blank">Pangram Pangram</a>(Editorial New),<br>
+              以及 <a href="https://www.grootfontein.net/" target="_blank">Art Grootfontein</a> (Gilway)
+            </span>
+          </div>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="resetPos" onclick="resetPos()">重置</button>
+        </div>
+  
+        <button type="button" class="collapsible"><h1>字体</h1></button>
+        <div class="content">
+
+          <div class="coupling0">
+            <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+              <option id="font0" value="0">Milligram - Heavy</option>
+              <option id="font1" value="1">Inter - Medium</option>
+              <option id="font2" value="2">Gilway - Bold</option>
+              <option id="font3" value="3">Editorial New - Thin</option>
+              <option id="font4" value="4" selected="selected">Evans - Narrow - Heavy</option>
+            </select>
+          </div>
+  
+          <div class="coupling1">
+            <div class="coupling_label"><h3>大小</h3></div>
+            <input type="range" min="1" max="100" value="50" id="textScaler" onchange="setTextScaler(this.value)">
+          </div>
+
+          <div class="coupling_label3"><h3>显示</h3></div>
+          <div class="coupling3">
+            <div class="coupling3sub">
+              <div class="couplingEntry">
+                <input type="radio" id="setHours" name="setSet" value=0 onclick="setSet(this.value)" checked>
+                <label for="none">小时</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="setHoursMin" name="setSet" value=1 onclick="setSet(this.value)">
+                <label for="loose">时与分</label>
+              </div>
+            </div>
+
+            <div class="coupling3sub">
+              <div class="couplingEntry">
+                <input type="radio" id="setText" name="setSet" value=2 onclick="setSet(this.value)">
+                <label for="strong">文字</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="setParticle" name="setSet" value=3 onclick="setSet(this.value)">
+                <label for="strong">粒子</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="topBotText">
+            <div class="coupling4">
+              <div class="coupling_label"><h4>顶部</h4></div>
+              <input type="text" value="时光" id="textTop" oninput="setTextTop(this.value)">
+            </div>
+  
+            <div class="coupling4">
+              <div class="coupling_label"><h4>底部</h4></div>
+              <input type="text" value="飞逝" id="textBot" oninput="setTextBottom(this.value)">
+            </div>
+          </div>
+
+          <div class="coupling_label3"><h3>重置间隔…</h3></div>
+          <div class="coupling2">
+            <div class="couplingEntry">
+              <input type="radio" id="resetNever" name="setReset" value=0 onclick="setReset(this.value)" checked>
+              <label for="none">从不</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="reset5sec" name="setReset" value=1 onclick="setReset(this.value)">
+              <label for="loose">5 秒</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="reset1min" name="setReset" value=2 onclick="setReset(this.value)">
+              <label for="strong">分钟</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="collapsible"><h1>时钟</h1></button>
+        <div class="content">
+          <div class="coupling1">
+            <div class="coupling_label"><h3>缩放</h3></div>
+            <input type="range" min="1" max="100" value="50" id="textScaler" onchange="setFullScale(this.value)">
+          </div>
+
+          <div class="coupling0">
+            <select name="styleChange" id="styleChange" onchange="setStyle(this.value)">
+              <option id="style0" value="0" selected>无</option>
+              <option id="style1" value="1">边框</option>
+              <option id="style2" value="2">剪影</option>
+            </select>
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>填充</h3></div>
+            <input type="color" id="fillColor" name="fillColor" value="#000000" oninput="setFillColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>背景</h3></div>
+            <input type="color" id="bkgdColor" name="bkgdColor" value="#ffffff" oninput="setBkgdColor(this.value)">
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>指针</h3></div>
+            <input type="color" id="handColor" name="handColor" value="#000000" oninput="setHandColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>强调色</h3></div>
+            <input type="color" id="accentColor" name="accentColor" value="#ff0000" oninput="setAccentColor(this.value)">
+          </div>
+        </div>
+  
+        <button type="button" class="collapsible"><h1>物理</h1></button>
+        <div class="content">
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>重力<br>角度</h3></div>
+            <div id="handle2"></div>
+          </div>
+          <div class="coupling1">
+            <div class="coupling_label"><h3>强度</h3></div>
+            <input type="range" min="0" max="100" value="0" id="gravityStrength" oninput="setGravityStrength(this.value)">
+          </div>
+          <!-- <div class="coupling1">
+            <label for="constrainOn">Connect Text</label>
+            <input type="checkbox" id="constrainOn" name="constrainOn" onclick="toggleConstrainOn()" checked>
+          </div> -->
+
+          <!-- <div class="coupling3">
+            <div class="coupling_label3"><h3>Type Connections</h3></div>
+            <div class="coupling2">
+              <div class="couplingEntry">
+                <input type="radio" id="none" name="connectSet" value=0 onclick="setConnectSet(this.value)">
+                <label for="none">None</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="loose" name="connectSet" value=1 onclick="setConnectSet(this.value)" checked>
+                <label for="loose">Loose</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="strong" name="connectSet" value=2 onclick="setConnectSet(this.value)">
+                <label for="strong">Strong</label>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>边界</h3></div>
+            <input type="range" min="0" max="100" value="0" id="padFactor" oninput="setPadFactor(this.value)">
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+    <div>
+      <label class="switch">
+        <input type="checkbox" checked oninput="hideWidget()">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    
+    <script>
+      // When the user clicks on <div>, open the popup
+      function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+      }
+    </script>
+    
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+    
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+  
+  <a href="guide.html" style="position:fixed;left:8px;bottom:6px;z-index:99999;font:11px/1.2 'IBM Plex Mono',monospace;color:#000;background:#fff;border:1px solid #000;padding:4px 7px;text-decoration:none;opacity:.7">中文说明</a>
+</body>
+</html>
